@@ -12,13 +12,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const MONGO_URI = process.env.MONGO;
+
 // Test route
 app.get("/api/tryserver", (req, res) => {
   res.json({ message: data });
 });
 
 // Connect MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/siomaiyan", {
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
