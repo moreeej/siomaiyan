@@ -1,23 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const userRoutes = require('./routes/routes');
+const allRoutes = require('./routes/routes');
 
 
 
-const data = ["jerome", "bryan", "virgo"];
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const MONGO_URI = process.env.MONGO;
-
-
+const data = ["jerome", "bryan", "virgo"];
 app.get("/api/tryserver", (req, res) => {
   res.json({ message: data });
 });
+
+// const MONGO_URI = process.env.MONGO;
+const MONGO_URI = "mongodb://localhost:27017/siomaiyan"
+
 
 
 mongoose.connect(MONGO_URI, {
@@ -28,7 +30,7 @@ mongoose.connect(MONGO_URI, {
 .catch(err => console.error("MongoDB connection error:", err));
 
 
-app.use('/api', userRoutes);
+app.use('/api', allRoutes);
 
 
 app.listen(8080, () => {
