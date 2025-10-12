@@ -1,60 +1,164 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import home_image from "../assets/home/home_image.svg"
-import { supabase } from "../supabase"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import home_image from "../assets/home/home_image.svg";
+import location1 from "../assets/home/location1.svg";
+import location2 from "../assets/home/location2.svg";
+import message_image from "../assets/home/messages_image.svg";
+import Footer from "../components/Footer";
 
 
+export default function Home() {
+  const [users, setUsers] = useState([]);
+  const [products, setProdcuts] = useState([]);
 
+  async function fetchUsers() {
+    try {
+      const { data } = await axios.get("http://localhost:8080/api/getUsers");
+      setUsers(data);
 
-export default function Home(){
-
-    const [users, setUsers] = useState([])
-
-    async function fetchUsers() {
-        try {
-            const { data } = await axios.get("http://localhost:8080/api/getUsers");
-            setUsers(data)
-            
-            console.log("the data",data);
-        } catch (err) {
-            console.error("Error fetching users:", err);
-        }
+      console.log("the data", data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
     }
+  }
 
-    const [images, setImage]= useState([])
+  async function fetchProducts() {
+    try {
+      const { data } = await axios.get("http://localhost:8080/api/getProducts");
+      setProdcuts(data);
 
-    async function getImage() {
-        const { data, error } = await supabase.from("images").select();
-
-        if (error) {
-            console.error("Error fetching images:", error.message);
-            return;
-        }
-
-        console.log("Fetched images:", data);
-        setImage(data);
+      console.log("the prodcuts", data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
     }
+  }
 
+  useEffect(() => {
+    fetchUsers();
+    fetchProducts();
+  }, []);
 
-    useEffect(() => {
-        fetchUsers();
-        getImage()
-    }, []); 
+  const inputs = [
+    {
+      name: "Full Name",
+      type: "text",
+    },
+    {
+      name: "Email Address",
+      type: "email",
+    },
+    {
+      name: "Subject",
+      type: "text",
+    },
+    {
+      name: "Message",
+      type: "text",
+    },
+  ];
 
-    return(
-        <>
-            <div className="w-full h-[calc(100svh-120px)] overflow-y-auto px-10 pt-5">
-                <img src={home_image} alt="siomaiyan" className="w-full" />
+  return (
+    <>
+      <div className="w-full px-10 overflow-y-auto mt-5">
+        <img src={home_image} alt="siomaiyan" className="w-full" />
+      </div>
+
+      <div className="w-full px-10 mt-3">
+        <div className="w-full bg-[#352e32] flex flex-col justify-center items-center py-5 rounded-2xl">
+          <div className="flex flex-col items-center">
+            <h1 className="text-white text-2xl font-semibold">Products</h1>
+            <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
+          </div>
+
+          <div className="w-full flex justify-evenly mt-5">
+            {products.map((products, index) => (
+              <div key={index} className="bg-white rounded-2xl overflow-hidden">
+                <img
+                  src={products.image}
+                  alt={products.name}
+                  className="w-100"
+                />
+              </div>
+            ))}
+          </div>
+
+          <button className="mt-5 w-40 h-15 !text-xl text-white">
+            See All
+          </button>
+        </div>
+      </div>
+
+      <div className="w-full px-10 mt-5">
+        <div className="w-full h-full rounded-xl">
+          <div className="flex justify-center items-center flex-col w-full bg-[#352e32] rounded-2xl py-5">
+            <div className="flex flex-col items-center">
+              <h1 className="text-white text-2xl font-semibold">Locations</h1>
+              <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
             </div>
 
+            <div className="w-full flex justify-evenly mt-5">
+              <div className="flex flex-col justify-center items-center">
+                <img src={location1} alt="location 1" className="w-150" />
+                <p className="text-2xl font-bold mt-5">
+                  Villa Antonina / Holy Trinity Parish
+                </p>
+                <p>San Nicolas 2, Bacoor City, Cavite</p>
+                <p className="font-bold text-2xl mt-8">Sundays</p>
+                <p>9:00am - 9:00pm</p>
+              </div>
+
+              <div className="flex flex-col justify-center items-center">
+                <img src={location2} alt="location 2" className="w-150" />
+                <p className="text-2xl font-bold mt-5">Cuneta</p>
+                <p>San Nicolas 1, Bacoor City, Cavite</p>
+                <p className="font-bold text-2xl mt-8">
+                  Thursdays, Saturdays, and Sundays
+                </p>
+                <p>2:00pm - 9:00pm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full mt-5 px-10">
+        <div className="w-full bg-[#352e32] flex flex-col rounded-2xl py-5">
+          <div className="flex flex-col items-center">
+            <h1 className="text-white text-2xl font-semibold">Message Us</h1>
+            <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
+          </div>
+
+          <div className="w-full mt-10 flex justify-evenly px-10 items-center">
             <div>
-                {images.map((image, index) => (
-                    <div key={index}>
-                        <img src={image.image} />
-                    </div>
-                ))}
+              <img src={message_image} alt="message us" className="w-[600px]" />
             </div>
 
-        </>
-    )
+            <div className="grid grid-cols-[1fr_3fr] w-7/12 gap-4">
+              {inputs.map((input, index) => (
+                <>
+                  <h1 className="!text-2xl text-white">{input.name}</h1>
+
+                  {input.name === "Message" ? (
+                    <textarea
+                      className="bg-white border border-black w-full h-60 rounded-md text-black p-3 resize-none"
+                      placeholder="Enter your message..."
+                    ></textarea>
+                  ) : (
+                    <input
+                      type={input.type}
+                      className="bg-white border border-black w-full h-18 rounded-md text-black px-3"
+                      placeholder={`Enter your ${input.name.toLowerCase()}`}
+                    />
+                  )}
+                </>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <Footer />
+    </>
+  );
 }

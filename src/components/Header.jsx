@@ -1,7 +1,7 @@
-import logo from "../assets/logo.svg"
-import cart from "../assets/cart.png"
-import search from "../assets/search.png"
-import user from "../assets/user.png"
+import logo from "../assets/header/logo.svg"
+import cart from "../assets/header/cart.png"
+import search from "../assets/header/search.png"
+import user from "../assets/header/user.png"
 import { Link } from "react-router-dom"
 
 export default function Header() {

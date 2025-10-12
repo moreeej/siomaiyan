@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .main-container{
-  @apply w-[100svw] h-[100svh] bg-[#161616] flex flex-col;
+  @apply w-[100svw] h-[100svh] bg-[#161616] flex flex-col overflow-x-hidden scroll-smooth;
 }
 
 .content-container{
