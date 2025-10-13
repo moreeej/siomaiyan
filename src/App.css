@@ -1,8 +1,36 @@
 @import "tailwindcss";
 
-.main-container{
-  @apply w-[100svw] h-[100svh] bg-[#161616] flex flex-col overflow-x-hidden scroll-smooth;
+html {
+  overflow-y: scroll;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #383838;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #383838; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #222;
+}
+
+
+.main-container {
+  @apply w-[100vw] min-h-[100svh] flex flex-col overflow-x-hidden scroll-smooth overflow-y-auto;
+}
+
 
 .content-container{
   @apply w-full flex-grow bg-[#161616];
@@ -14,5 +42,5 @@
 
 
 .logo{
-  @apply h-[calc(100%-30px)];
+  @apply h-[90px];
 }
