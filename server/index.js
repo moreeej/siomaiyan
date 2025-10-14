@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,7 +6,7 @@ const allRoutes = require('./routes/routes');
 
 
 
-
+const MONGO_URL = process.env.MONGO
 
 const app = express();
 app.use(cors());
@@ -17,12 +18,11 @@ app.get("/api/tryserver", (req, res) => {
   res.json({ message: data });
 });
 
-// const MONGO_URI = process.env.MONGO;
-const MONGO_URI = "mongodb://localhost:27017/siomaiyan"
 
 
 
-mongoose.connect(MONGO_URI, {
+
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
