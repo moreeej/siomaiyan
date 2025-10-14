@@ -24,10 +24,10 @@ export default function Home() {
 
   async function fetchProducts() {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/getProducts");
+      const { data } = await axios.get("http://localhost:8080/api/getProductWithLimit");
       setProducts(data);
 
-      console.log("the prodcuts", data);
+      console.log("the products", data);
     } catch (err) {
       console.error("Error fetching users:", err);
     }
@@ -80,7 +80,7 @@ export default function Home() {
                   <img
                     src={products.image}
                     alt={products.name}
-                    className="w-100"
+                    className="w-70"
                   />
                 </div>
               ))}

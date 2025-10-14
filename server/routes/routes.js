@@ -8,6 +8,7 @@ const cartController = require('../controllers/CartController')
 router.get("/getUsers", userController.getUsers);
 
 router.get("/getProducts", productController.getProducts)
+router.get("/getProductWithLimit", productController.getProductWithLimit)
 
 router.get("/getCarts", cartController.getCarts)
 
