@@ -13,7 +13,7 @@ export default function Home() {
 
   async function fetchUsers() {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/getUsers");
+      const { data } = await axios.get("https://nu-mindify-api.vercel.app/api/getUsers");
       setUsers(data);
 
       console.log("the data", data);
@@ -24,7 +24,7 @@ export default function Home() {
 
   async function fetchProducts() {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/getProductWithLimit");
+      const { data } = await axios.get("https://nu-mindify-api.vercel.app/api/getProductWithLimit");
       setProducts(data);
 
       console.log("the products", data);
