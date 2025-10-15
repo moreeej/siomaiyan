@@ -10,7 +10,7 @@ export default function Products(){
 
     async function fetchProducts(){
         try{
-            const {data} = await axios.get("http://localhost:8080/api/getProducts")
+            const {data} = await axios.get("https://siomaiyan.vercel.app/api/getProducts")
             getProducts(data)
             console.log("products are:", data);
             
