@@ -1,6 +1,7 @@
 import axios from "axios"
 import Footer from "../components/Footer"
 import { useEffect, useState } from "react"
+import { API_URL } from "../../Constants"
 
 
 
@@ -10,7 +11,7 @@ export default function Products(){
 
     async function fetchProducts(){
         try{
-            const {data} = await axios.get("https://siomaiyan.vercel.app/api/getProducts")
+            const {data} = await axios.get(`${API_URL}/getProducts`)
             getProducts(data)
             console.log("products are:", data);
             

@@ -6,6 +6,8 @@ import location2 from "../assets/home/location2.svg";
 import message_image from "../assets/home/messages_image.svg";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
+import { API_URL } from "../../Constants";
+
 
 export default function Home() {
   const [users, setUsers] = useState([]);
@@ -13,7 +15,7 @@ export default function Home() {
 
   async function fetchUsers() {
     try {
-      const { data } = await axios.get("https://siomaiyan.vercel.app/api/getUsers");
+      const { data } = await axios.get(`${API_URL}/getUsers`);
       setUsers(data);
 
       console.log("the data", data);
@@ -24,7 +26,7 @@ export default function Home() {
 
   async function fetchProducts() {
     try {
-      const { data } = await axios.get("https://siomaiyan.vercel.app/api/getProductWithLimit");
+      const { data } = await axios.get(`${API_URL}/getProductWithLimit`);
       setProducts(data);
 
       console.log("the products", data);
