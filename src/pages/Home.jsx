@@ -10,19 +10,19 @@ import { API_URL } from "../../Constants";
 
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
 
-  async function fetchUsers() {
-    try {
-      const { data } = await axios.get(`${API_URL}/getUsers`);
-      setUsers(data);
+  // async function fetchUsers() {
+  //   try {
+  //     const { data } = await axios.get(`${API_URL}/getUsers`);
+  //     setUsers(data);
 
-      console.log("the data", data);
-    } catch (err) {
-      console.error("Error fetching users:", err);
-    }
-  }
+  //     console.log("the data", data);
+  //   } catch (err) {
+  //     console.error("Error fetching users:", err);
+  //   }
+  // }
 
   async function fetchProducts() {
     try {
@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetchUsers();
+    // fetchUsers();
     fetchProducts();
   }, []);
 
