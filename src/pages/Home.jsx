@@ -31,7 +31,7 @@ export default function Home() {
 
       console.log("the products", data);
     } catch (err) {
-      console.error("Error fetching users:", err);
+      console.error("Error fetching products with limit:", err);
     }
   }
 
