@@ -2,10 +2,11 @@ import logo from "../assets/header/siomaiyan_logo.png";
 import cart from "../assets/header/cartsu.svg";
 import search from "../assets/header/searchsu.svg";
 import user from "../assets/header/usersu.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { userContext } from "../context/UserContext";
 import Button from "./Button";
+
 
 
 
@@ -19,6 +20,7 @@ export default function Header() {
   ];
 
   const { username, userId } = useContext(userContext)
+  const navigate = useNavigate()
 
   return (
     <div className="w-full h-auto flex flex-col justify-center items-center top-0 sticky z-[999] border-b-5 border-[#FF2B2B] bg-black">
@@ -42,6 +44,7 @@ export default function Header() {
                     height={"h-20"}
                     text={"Login"}
                     color={"#000000"}
+                    onClick={() => navigate("/login")}
                   />
                 }
                 

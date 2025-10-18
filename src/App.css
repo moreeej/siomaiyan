@@ -36,7 +36,7 @@ html {
 
 
 .content-container{
-  @apply w-full flex-grow bg-[#ffffff];
+  @apply w-full flex-grow flex flex-col bg-white;
 }
 
 .icons {

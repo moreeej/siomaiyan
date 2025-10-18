@@ -9,6 +9,8 @@ import Button from "../components/Button";
 import { API_URL } from "../../Constants";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../context/UserContext";
+import Spinner from "../components/Spinner";
+
 
 
 export default function Home() {
@@ -71,9 +73,7 @@ export default function Home() {
 
             <div className="w-full flex justify-evenly my-5">
               {isLoading ? (
-                <div className="flex justify-center items-center w-full h-40">
-                  <span className="loading loading-spinner loading-lg text-red-700 w-20 h-20"></span>
-                </div>
+                <Spinner />
               ) : (
                 products.map((product, index) => (
                   <div
