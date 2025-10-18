@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import home_image from "../assets/home/home_image.png";
 import location1 from "../assets/home/location1.svg";
 import location2 from "../assets/home/location2.svg";
@@ -7,31 +7,27 @@ import message_image from "../assets/home/messages_image.svg";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import { API_URL } from "../../Constants";
+import { useNavigate } from "react-router-dom";
+import { userContext } from "../context/UserContext";
 
 
 export default function Home() {
-  // const [users, setUsers] = useState([]);
+
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const [isLoading, setIsloading] = useState(false);
 
-  // async function fetchUsers() {
-  //   try {
-  //     const { data } = await axios.get(`${API_URL}/getUsers`);
-  //     setUsers(data);
-
-  //     console.log("the data", data);
-  //   } catch (err) {
-  //     console.error("Error fetching users:", err);
-  //   }
-  // }
 
   async function fetchProducts() {
+    setIsloading(true);
     try {
       const { data } = await axios.get(`${API_URL}/getProductWithLimit`);
       setProducts(data);
-
       console.log("the products", data);
     } catch (err) {
       console.error("Error fetching products with limit:", err);
+    } finally {
+      setIsloading(false);
     }
   }
 
@@ -74,25 +70,32 @@ export default function Home() {
             </div>
 
             <div className="w-full flex justify-evenly my-5">
-              {products.map((products, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl overflow-hidden"
-                >
-                  <img
-                    src={products.image}
-                    alt={products.name}
-                    className="w-70"
-                  />
+              {isLoading ? (
+                <div className="flex justify-center items-center w-full h-40">
+                  <span className="loading loading-spinner loading-lg text-red-700 w-20 h-20"></span>
                 </div>
-              ))}
+              ) : (
+                products.map((product, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-70"
+                    />
+                  </div>
+                ))
+              )}
             </div>
-            
-            <Button 
+
+            <Button
               width={"w-40"}
               height={"h-15"}
               color={"#000000"}
               text={"See All"}
+              onClick={() => navigate("/products")}
             />
           </div>
         </div>
@@ -139,11 +142,7 @@ export default function Home() {
 
             <div className="w-full mt-10 flex justify-evenly px-10 items-center">
               <div className="w-1/2 h-full flex justify-center items-center">
-                <img
-                  src={message_image}
-                  alt="message us"
-                  className="w-full"
-                />
+                <img src={message_image} alt="message us" className="w-full" />
               </div>
 
               <div className="grid grid-cols-[1fr_3fr] gap-4 w-1/2 h-full pl-5">

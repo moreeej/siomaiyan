@@ -1,12 +1,15 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 html {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 * {
   scrollbar-width: thin;
   scrollbar-color: #fff #383838;
+  color: black;
 }
 ::-webkit-scrollbar {
   width: 6px;
@@ -28,16 +31,16 @@ html {
 
 
 .main-container {
-  @apply w-[100vw] min-h-[100svh] flex flex-col overflow-x-hidden scroll-smooth overflow-y-auto;
+  @apply w-[100vw] min-h-[100svh] flex flex-col scroll-smooth;
 }
 
 
 .content-container{
-  @apply w-full flex-grow bg-[#161616];
+  @apply w-full flex-grow bg-[#ffffff];
 }
 
 .icons {
-  @apply w-[40px] h-[40px] filter invert;
+  @apply w-[40px] h-[40px];
 }
 
 
