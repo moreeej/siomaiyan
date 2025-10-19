@@ -23,7 +23,7 @@ export default function Header() {
   const navigate = useNavigate()
 
   return (
-    <div className="w-full h-auto flex flex-col justify-center items-center top-0 sticky z-[999] border-b-5 border-[#FF2B2B] bg-black">
+    <div className="w-full h-auto flex flex-col justify-center items-center top-0 sticky z-40 border-b-5 border-[#FF2B2B] bg-black">
       <div className="w-full h-30 bg-white">
           <div className="grid grid-cols-3 h-full">
             <div></div>

@@ -1,11 +1,12 @@
 import axios from "axios"
 import Footer from "../components/Footer"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { API_URL } from "../../Constants"
 import Spinner from "../components/Spinner"
-import add from "../assets/products/addsu.svg"
-import minus from "../assets/products/minusu.svg"
 import add_to_cart from "../assets/products/add_cartsu.svg"
+import AddToCartModal from "../components/AddToCartModal"
+import { productContext } from "../context/ProductContext"
+
 
 
 
@@ -13,6 +14,8 @@ export default function Products(){
 
     const [products, getProducts] = useState([])
     const [loadingProducts, setLoadingProducts] = useState(false)
+
+    const {addToCart, setAddToCart, showAddModal, setShowAddModal} = useContext(productContext)
 
     async function fetchProducts(){
         setLoadingProducts(true)
@@ -37,7 +40,6 @@ export default function Products(){
     }, [])
     return(
         <>
-
             <div className="flex flex-col items-center">
                 <h1 className="text-white text-2xl font-semibold">Products</h1>
                 <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
@@ -58,12 +60,26 @@ export default function Products(){
                         </div>
 
                         <div className="w-full h-20 flex justify-end">
-                            <img src={add_to_cart} alt="add" className="w-10 cursor-pointer" />
+                            <img 
+                            src={add_to_cart} alt="add" 
+                            className="w-10 cursor-pointer" 
+                            onClick={() => {
+                                setShowAddModal(!showAddModal)
+                                setAddToCart({
+                                    name: product.product_name,
+                                    price: product.price,
+                                    image: product.image,
+                                    category: product.category,
+                                    quantity: product.quantity
+                                })
+                            }} />
                         </div>
                     </div>
                 ))}
             </div>
             <Footer />
+
+            {showAddModal && <AddToCartModal />}
         </>
     )
 }
