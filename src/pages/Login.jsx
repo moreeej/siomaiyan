@@ -4,34 +4,39 @@ import Button from "../components/Button";
 import axios from "axios";
 import { userContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const { currUsername, setCurrUsername, userId, setUserId } = useContext(userContext)
+  const { currUsername, setCurrUsername, userId, setUserId } =
+    useContext(userContext);
 
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   async function handleLogin() {
     if (!username || !password) {
       setMessage("Please fill in both fields.");
       return;
     }
-    
+
     try {
       const res = await axios.post(`${API_URL}/checkCreds`, {
         username,
         password,
       });
+
       if (res.data.success) {
-        setCurrUsername(res.data.username)
-        setUserId(res.data.userId)
+        setCurrUsername(res.data.username);
+        setUserId(res.data.userId);
+
+        Cookies.set("userId", res.data.userId, { expires: 7 });
+        Cookies.set("username", res.data.username, { expires: 7 });
+
         setMessage(`Welcome, ${res.data.username}!`);
-        navigate("/")
+        navigate("/");
       } else {
         setMessage(res.data.message || "Invalid credentials.");
       }
@@ -65,7 +70,6 @@ export default function Login() {
             placeholder="Enter password"
           />
 
-          {/* Button (aligned under inputs) */}
           <div></div>
           <Button
             width="w-80"
@@ -75,7 +79,6 @@ export default function Login() {
             onClick={handleLogin}
           />
 
-          {/* Message display */}
           {message && (
             <div className="col-span-2 mt-4 text-center text-white font-medium">
               {message}

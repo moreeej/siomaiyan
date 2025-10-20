@@ -36,7 +36,12 @@ export default function Header() {
                   <>
                     <img src={search} alt="search" className="w-8" />
                     <img src={user} alt="user" className="w-8" />
-                    <img src={cart} alt="cart" className="w-8" />
+                    <img
+                      src={cart}
+                      alt="cart"
+                      className="w-8 cursor-pointer"
+                      onClick={() => navigate("/cart")}
+                    />
                   </>
                 :
                   <Button 
