@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../Constants";
 import Cookies from "js-cookie";
 
+
 export default function ViewCart() {
   const [cartItems, setCartItems] = useState([]);
 
