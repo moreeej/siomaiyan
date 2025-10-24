@@ -6,6 +6,8 @@ import axios from "axios";
 import { API_URL } from "../../Constants";
 import { userContext } from "../context/UserContext";
 import MessageModal from "./MessageModal";
+import Button from "./Button";
+
 
 export default function AddToCartModal() {
   const { addToCart, showAddModal, setShowAddModal } =
@@ -46,9 +48,9 @@ export default function AddToCartModal() {
       <div className="fixed inset-0 bg-black/60 z-[10000] flex justify-center items-center">
         {!showSuccessModal && (
           <div className="bg-white w-1/3 rounded-xl shadow-lg flex flex-col items-center px-5 py-10">
-            <div className="w-full flex justify-end">
+            <div className="w-full flex justify-end !bg-transparent">
               <button
-                className=""
+                className="!bg-black !text-white p-5"
                 onClick={() => {
                   setShowAddModal(!showAddModal);
                   setQuantity(0);
@@ -59,12 +61,12 @@ export default function AddToCartModal() {
               </button>
             </div>
             <img src={addToCart.image} alt={addToCart.name} className="w-100" />
-            <h1>{addToCart.name}</h1>
-            <div className="w-full flex justify-between px-5">
-              <p>Stock: {addToCart.quantity}</p>
-              <p>Total: ₱{totalPrice}</p>
+            <h1 className="mt-5">{addToCart.name}</h1>
+            <div className="w-full flex justify-between px-5 mt-5">
+              <p className="text-2xl">Stock: <span className="font-bold">{addToCart.quantity}</span></p>
+              <p className="text-2xl">Total: <span className="font-bold">₱{totalPrice}</span></p>
             </div>
-            <div className="w-full flex gap-8 justify-end mt-3 items-center">
+            <div className="w-full flex gap-8 justify-end mt-3 items-center mt-5">
               <button
                 onClick={() => {
                   if (quantity > 0) {
@@ -93,17 +95,17 @@ export default function AddToCartModal() {
               </button>
             </div>
 
-            <div className="w-full flex justify-end">
-              <button
-                className="!btn !btn-success mt-5"
+            <div className="w-full flex justify-end mt-5">
+
+              <Button 
+                text={"Add to cart"}
+                bgColor={"#80EF80"}
+                textColor={"#000000"}
                 onClick={async () => {
                   await handleAddToCart();
-
                   setShowSuccessModal(true);
                 }}
-              >
-                Add to cart
-              </button>
+              />
             </div>
           </div>
         )}

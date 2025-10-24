@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { userContext } from "../context/UserContext";
 import Button from "./Button";
-
+import Cookies from "js-cookie";
 
 
 
@@ -19,8 +19,19 @@ export default function Header() {
     { id: "promotion", text: "Promotions", path: "/promotion" },
   ];
 
-  const { username, userId } = useContext(userContext)
+  const { userId, setUserId, setCurrUsername} = useContext(userContext)
   const navigate = useNavigate()
+
+    async function handlesLogout() {
+    Cookies.remove("userId");
+    Cookies.remove("username");
+    
+    setUserId("")
+    setCurrUsername("")
+
+
+    navigate("/");
+  }
 
   return (
     <div className="w-full h-auto flex flex-col justify-center items-center top-0 sticky z-40 border-b-5 border-[#FF2B2B] bg-black">
@@ -35,7 +46,7 @@ export default function Header() {
                 {userId ? 
                   <>
                     <img src={search} alt="search" className="w-8" />
-                    <img src={user} alt="user" className="w-8" />
+                    <img src={user} alt="user" className="w-8" onClick={handlesLogout}/>
                     <img
                       src={cart}
                       alt="cart"
@@ -48,7 +59,8 @@ export default function Header() {
                     width={"w-40"}
                     height={"h-20"}
                     text={"Login"}
-                    color={"#000000"}
+                    bgColor={"#000000"}
+                    textColor={"#ffffff"}
                     onClick={() => navigate("/login")}
                   />
                 }
@@ -63,7 +75,13 @@ export default function Header() {
         <div className="w-full flex justify-evenly items-center">
           {paths.map((path) => (
             <Link key={path.id} to={path.path}>
-              <button>{path.text}</button>
+              <Button
+                text={path.text}
+                width={"w-40"}
+                height={"h-15"}
+                bgColor={"#ffffff"}
+                textColor={"#000000"}
+              />
             </Link>
           ))}
         </div>

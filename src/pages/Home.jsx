@@ -67,7 +67,7 @@ export default function Home() {
         <div className="w-full px-20 mt-3">
           <div className="w-full bg-[#352e32] flex flex-col justify-center items-center py-5 rounded-2xl">
             <div className="flex flex-col items-center">
-              <h1 className="text-white text-2xl font-semibold">Products</h1>
+              <h1 className="!text-white text-2xl font-semibold">Products</h1>
               <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
             </div>
 
@@ -93,7 +93,8 @@ export default function Home() {
             <Button
               width={"w-40"}
               height={"h-15"}
-              color={"#000000"}
+              bgColor={"#000000"}
+              textColor={"#ffffff"}
               text={"See All"}
               onClick={() => navigate("/products")}
             />
@@ -104,29 +105,29 @@ export default function Home() {
           <div className="w-full h-full rounded-xl">
             <div className="flex justify-center items-center flex-col w-full bg-[#352e32] rounded-2xl py-5">
               <div className="flex flex-col items-center">
-                <h1 className="text-white text-2xl font-semibold">Locations</h1>
+                <h1 className="!text-white text-2xl font-semibold">Locations</h1>
                 <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
               </div>
 
               <div className="w-full flex justify-evenly mt-5">
                 <div className="flex flex-col justify-center items-center">
                   <img src={location1} alt="location 1" className="w-150" />
-                  <p className="text-2xl font-bold mt-5">
+                  <p className="!text-white text-2xl font-bold mt-5">
                     Villa Antonina / Holy Trinity Parish
                   </p>
-                  <p>San Nicolas 2, Bacoor City, Cavite</p>
-                  <p className="font-bold text-2xl mt-8">Sundays</p>
-                  <p>9:00am - 9:00pm</p>
+                  <p className="!text-white">San Nicolas 2, Bacoor City, Cavite</p>
+                  <p className="!text-white font-bold text-2xl mt-8">Sundays</p>
+                  <p className="!text-white">9:00am - 9:00pm</p>
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
                   <img src={location2} alt="location 2" className="w-150" />
-                  <p className="text-2xl font-bold mt-5">Cuneta</p>
-                  <p>San Nicolas 1, Bacoor City, Cavite</p>
-                  <p className="font-bold text-2xl mt-8">
+                  <p className="text-2xl font-bold mt-5 !text-white">Cuneta</p>
+                  <p className="!text-white">San Nicolas 1, Bacoor City, Cavite</p>
+                  <p className="font-bold text-2xl mt-8 !text-white">
                     Thursdays, Saturdays, and Sundays
                   </p>
-                  <p>2:00pm - 9:00pm</p>
+                  <p className="!text-white">2:00pm - 9:00pm</p>
                 </div>
               </div>
             </div>
@@ -136,7 +137,7 @@ export default function Home() {
         <div className="w-full mt-5 px-20">
           <div className="w-full bg-[#352e32] flex flex-col rounded-2xl py-5 h-auto">
             <div className="flex flex-col items-center">
-              <h1 className="text-white text-2xl font-semibold">Message Us</h1>
+              <h1 className="!text-white text-2xl font-semibold ">Message Us</h1>
               <span className="block border-b-2 border-red-500 w-80 mt-2"></span>
             </div>
 
@@ -148,7 +149,7 @@ export default function Home() {
               <div className="grid grid-cols-[1fr_3fr] gap-4 w-1/2 h-full pl-5">
                 {inputs.map((input) => (
                   <>
-                    <h1 className="!text-2xl text-white">{input.name}</h1>
+                    <h1 className="!text-2xl !text-white">{input.name}</h1>
 
                     {input.name === "Message" ? (
                       <textarea
@@ -170,7 +171,7 @@ export default function Home() {
                     width={"w-40"}
                     height={"h-15"}
                     text={"Submit"}
-                    color={"#FF2B2B"}
+                    bgColor={"#FF2B2B"}
                   />
                 </div>
               </div>

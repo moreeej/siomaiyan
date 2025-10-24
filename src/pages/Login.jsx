@@ -11,9 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const { currUsername, setCurrUsername, userId, setUserId } =
-    useContext(userContext);
-
+  const { setCurrUsername, setUserId } = useContext(userContext);
   const navigate = useNavigate();
 
   async function handleLogin() {
@@ -47,44 +45,62 @@ export default function Login() {
   }
 
   return (
-    <div className="w-full flex-1 bg-green-400 flex justify-center items-center py-12">
-      <div className="w-full flex justify-center items-center">
-        <div className="w-1/2 bg-red-400 grid grid-cols-[1fr_3fr] gap-4 p-6 rounded-2xl shadow-lg">
-          {/* Username */}
-          <h1 className="text-white font-semibold self-center">Username</h1>
+    <div className="flex flex-1 items-center justify-center bg-gradient-to-br from-black via-[#1a0000] to-red-900">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center border border-black">
+        {/* Header */}
+        <h1 className="text-3xl font-extrabold text-red-600 mb-6 uppercase tracking-wide">
+          Login
+        </h1>
+
+        {/* Username Field */}
+        <div className="w-full mb-5">
+          <label className="block text-sm font-semibold text-black mb-2">
+            Username
+          </label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-80 h-10 bg-white rounded px-3 outline-none"
+            className="w-full h-11 px-4 border-2 border-black rounded-md outline-none focus:border-red-600 transition"
             placeholder="Enter username"
           />
+        </div>
 
-          {/* Password */}
-          <h1 className="text-white font-semibold self-center">Password</h1>
+        {/* Password Field */}
+        <div className="w-full mb-5">
+          <label className="block text-sm font-semibold text-black mb-2">
+            Password
+          </label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-80 h-10 bg-white rounded px-3 outline-none"
+            className="w-full h-11 px-4 border-2 border-black rounded-md outline-none focus:border-red-600 transition"
             placeholder="Enter password"
           />
-
-          <div></div>
-          <Button
-            width="w-80"
-            height="h-12"
-            color="#000000"
-            text="Login"
-            onClick={handleLogin}
-          />
-
-          {message && (
-            <div className="col-span-2 mt-4 text-center text-white font-medium">
-              {message}
-            </div>
-          )}
         </div>
+
+        {/* Login Button */}
+        <button
+          onClick={handleLogin}
+          className="w-full h-11 mt-2 !bg-red-600 text-white font-semibold rounded-md hover:bg-black transition-all duration-300 shadow-md"
+        >
+          Login
+        </button>
+
+
+        {/* Message */}
+        {message && (
+          <div
+            className={`mt-4 text-center font-medium ${
+              message.includes("Welcome")
+                ? "text-green-600"
+                : "text-red-600"
+            }`}
+          >
+            {message}
+          </div>
+        )}
       </div>
     </div>
   );
