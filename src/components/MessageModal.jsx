@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { userContext } from "../context/UserContext";
 
 export default function MessageModal({ message, noClose}) {
-  const { setShowErrorModal } = useContext(userContext);
+  const { setShowMessageModal } = useContext(userContext);
 
   return (
     <>
@@ -14,7 +14,7 @@ export default function MessageModal({ message, noClose}) {
               <button
               className=""
               onClick={() => {
-                setShowErrorModal(false);
+                setShowMessageModal(false);
               }}
             >
               X
