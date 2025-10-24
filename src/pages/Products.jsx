@@ -16,6 +16,16 @@ export default function Products() {
 
   const { setAddToCart, showAddModal, setShowAddModal } = useContext(productContext);
   const { userId, showMessageModal, setShowMessageModal } = useContext(userContext);
+  useEffect(() => {
+    if (showMessageModal) {
+      const timer = setTimeout(() => {
+        setShowMessageModal(false);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showMessageModal]);
+
 
   async function fetchProducts() {
     setLoadingProducts(true);
@@ -94,7 +104,7 @@ export default function Products() {
       <Footer />
 
       {showAddModal && <AddToCartModal />}
-      {showMessageModal && <MessageModal message={"Please Log in First"} />}
+      {showMessageModal && <MessageModal message={"Please Log in First"} noClose={true} />}
     </>
   );
 }

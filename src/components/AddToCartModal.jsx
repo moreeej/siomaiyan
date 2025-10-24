@@ -66,7 +66,7 @@ export default function AddToCartModal() {
               <p className="text-2xl">Stock: <span className="font-bold">{addToCart.quantity}</span></p>
               <p className="text-2xl">Total: <span className="font-bold">₱{totalPrice}</span></p>
             </div>
-            <div className="w-full flex gap-8 justify-end mt-3 items-center mt-5">
+            <div className="w-full flex gap-8 justify-end items-center mt-5">
               <button
                 onClick={() => {
                   if (quantity > 0) {

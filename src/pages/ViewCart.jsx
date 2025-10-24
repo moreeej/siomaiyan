@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../Constants";
 import Cookies from "js-cookie";
 import Button from "../components/Button";
+import MessageModal from "../components/MessageModal";
 
 
 export default function ViewCart() {
   const [cartItems, setCartItems] = useState([]);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false)
 
   async function fetchCartItems() {
     try {
@@ -42,12 +44,22 @@ export default function ViewCart() {
       );
       setCheckedItems([]);
 
-      alert("Checkout successful!");
+      setShowSuccess(true)
     } catch (err) {
       console.error("Error during checkout:", err);
       alert("Error during checkout. Please try again.");
     }
   }
+
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess]);
 
   useEffect(() => {
     fetchCartItems();
@@ -105,7 +117,7 @@ export default function ViewCart() {
         )}
       </div>
 
-      <div className="mt-4 p-2 text-right font-bold text-lg border-t w-full flex justify-end">
+      <div className="mt-4 p-2 text-right font-bold text-lg w-full flex justify-end">
         <div className="fixed bottom-0 left-0 w-full flex items-center justify-end gap-10 bg-white border-t border-black py-4 px-10 z-50">
           Total:{" "}
           <span className="text-2xl font-semibold">
@@ -124,6 +136,14 @@ export default function ViewCart() {
           />
         </div>
       </div>
+
+      {showSuccess && 
+        <div className="w-screen h-screen bg-transparent fixed">
+          <div className="">
+            <MessageModal noClose={true} message={"Checkout Successful"} />
+          </div>
+        </div>
+      }
     </>
   );
 }
