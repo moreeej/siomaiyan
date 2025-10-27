@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { userContext } from "../context/UserContext";
 
+
 export default function MessageModal({ message, noClose}) {
   const { setShowMessageModal } = useContext(userContext);
 
