@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 
 
 
+
 export default function Promotion() {
 
     const [loading, setIsloading] = useState(false)
