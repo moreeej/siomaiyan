@@ -2,7 +2,6 @@ import about_image from "../assets/about/about_image.png"
 import Footer from "../components/Footer"
 
 
-
 export default function About(){
 
 
